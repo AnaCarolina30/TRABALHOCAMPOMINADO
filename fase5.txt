@@ -1,0 +1,11 @@
+dificuldade=3
+numBombas=18
+
+
+
+
+
+
+
+
+

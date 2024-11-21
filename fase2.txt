@@ -1,0 +1,8 @@
+dificuldade=1.5
+numBombas=12
+
+
+
+
+
+

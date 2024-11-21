@@ -1,0 +1,9 @@
+dificuldade=2
+numBombas=14
+
+
+
+
+
+
+
