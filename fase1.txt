@@ -1,0 +1,7 @@
+dificuldade=1
+numBombas=10
+
+
+
+
+

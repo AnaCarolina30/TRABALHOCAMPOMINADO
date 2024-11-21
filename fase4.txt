@@ -1,0 +1,10 @@
+dificuldade=2.5
+numBombas=16
+
+
+
+
+
+
+
+
