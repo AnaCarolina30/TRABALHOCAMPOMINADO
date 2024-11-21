@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dificuldade=1
 numBombas=10
 
@@ -5,3 +6,12 @@ numBombas=10
 
 
 
+=======
+dificuldade=1
+numBombas=10
+
+
+
+
+
+>>>>>>> 468af6e8b60b69b64c2a183411537e9d0a5e96da

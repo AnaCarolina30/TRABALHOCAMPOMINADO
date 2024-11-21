@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dificuldade=2
 numBombas=14
 
@@ -7,3 +8,14 @@ numBombas=14
 
 
 
+=======
+dificuldade=2
+numBombas=14
+
+
+
+
+
+
+
+>>>>>>> 468af6e8b60b69b64c2a183411537e9d0a5e96da

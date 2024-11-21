@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dificuldade=2.5
 numBombas=16
 
@@ -8,3 +9,15 @@ numBombas=16
 
 
 
+=======
+dificuldade=2.5
+numBombas=16
+
+
+
+
+
+
+
+
+>>>>>>> 468af6e8b60b69b64c2a183411537e9d0a5e96da
