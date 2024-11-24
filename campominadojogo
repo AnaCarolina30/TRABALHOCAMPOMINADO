@@ -109,8 +109,8 @@ int ganhou() {
     int quantidade = 0;
     int linha, coluna;
     for (linha = 0; linha < tam; linha++) {
-        for (coluna = 0; coluna < tam; colona++) {
-            if (!jogo[linha][colona].estaAberta && !jogo[linha][colona].eBomba)
+        for (coluna = 0; coluna < tam; coluna++) {
+            if (!jogo[linha][coluna].estaAberta && !jogo[linha][coluna].eBomba)
                 quantidade++;
         }
     }
@@ -121,8 +121,8 @@ int pontuacao(int dificuldade) {
     int pontos = 0;
     int linha, coluna;
     for (linha = 0; linha < tam; linha++) {
-        for (coluna = 0; coluna < tam; colona++) {
-            if (jogo[linha][colona].estaAberta && !jogo[linha][colona].eBomba)
+        for (coluna = 0; coluna < tam; coluna++) {
+            if (jogo[linha][coluna].estaAberta && !jogo[linha][coluna].eBomba)
                 pontos++;
         }
     }
@@ -160,6 +160,9 @@ void lerFase(int fase, int *dificuldade, int *numBombas) {
         fscanf(arquivo, "numBombas=%d\n", numBombas);
         fclose(arquivo);
     }
+    else {
+        printf("\n\n\t\t\tFase nao encontrada!\n");
+    }
 }
 
 void jogar(int nivel) {
@@ -168,38 +171,45 @@ void jogar(int nivel) {
     int numBombas;
 
     if (nivel <= 5) {
-        lerFase(nivel, &dificuldade, &numBombas);
+        lerFase(nivel, &dificuldade, &numBombas); 
     } else {
         dificuldade = nivel * 0.5;
         numBombas = 10 + (nivel - 1) * 2;
     }
 
+    inicializarJogo();
+    sortearBombas(numBombas); 
+    contarBombas();
+
     do {
-        printf("\n\n\t\t\tPONTUACAO: %d\n", pontuacao(dificuldade));
+        printf("\n\n\t\t\tPONTUACAO: %d\n", pontuacao(dificuldade)); 
         imprimir();
         do {
             printf("\nDigite as coordenadas de linha e coluna: ");
-            scanf("%d%d", &linhas, &colonas);
-            if (!coordenadaEhValida(linhas, colonas))
+            scanf("%d%d", &linhas, &colunas);
+            if (!coordenadaEhValida(linhas, colunas))
                 printf("\nCoordenada invalida!");
-        } while (!coordenadaEhValida(linhas, colonas) || jogo[linhas][colonas].estaAberta);
+        } while (!coordenadaEhValida(linhas, colunas) || jogo[linhas][colunas].estaAberta);
 
-        abrirCelula(linhas, colonas);
-    } while (ganhou() != 0 && !jogo[linhas][colonas].eBomba);
+        abrirCelula(linhas, colunas);
+    } while (ganhou() != 0 && !jogo[linhas][colunas].eBomba);
 
-    if (jogo[linhas][colonas].eBomba) {
+    if (jogo[linhas][colunas].eBomba) {
         printf("\n\tQue pena! Voce perdeu!\n");
     } else {
         printf("\n\tPARABENS VOCE GANHOU!\n");
     }
-    printf("\n\n\t\t\tPONTUACAO FINAL: %d\n", pontuacao(dificuldade));
-    salvarPontuacao(pontuacao(dificuldade));
+    printf("\n\n\t\t\tPONTUACAO FINAL: %d\n", pontuacao(dificuldade)); 
+    salvarPontuacao(pontuacao(dificuldade)); 
 }
 
 int main() {
+    int numBombas;
     int opcao;
     int iniciarJogo;
-    int nivel = 1;
+    int nivel;
+    int dificuldade;
+
     do {
         printf("\n\n\n        BEM VINDO AO CAMPO MINADO!\n\n\n");
         printf("      1.INICIAR JOGO          2.ESTATÍSTICAS          3.SAIR\n\n");
@@ -207,12 +217,19 @@ int main() {
         scanf("%d", &iniciarJogo);
 
         if (iniciarJogo == 1) {
+            nivel = 1;
             do {
+                if (nivel <= 5) {
+                    lerFase(nivel, &dificuldade, &numBombas); 
+                } else {
+                    dificuldade = nivel * 0.5;
+                    numBombas = 10 + (nivel - 1) * 2;
+                }
                 inicializarJogo();
-                sortearBombas(numBombas);
+                sortearBombas(numBombas); 
                 contarBombas();
                 printf("\n\t\t\tCAMPO MINADO\n");
-                jogar(nivel);
+                jogar(nivel); 
 
                 printf("\nDigite 1 para continuar jogando e 2 para voltar ao menu principal: ");
                 scanf("%d", &opcao);
@@ -225,7 +242,7 @@ int main() {
             printf("\n\n\t\t\tPONTUACOES\n");
             exibirLista(salvarPontuacao(0), 10);
         }
-    } while (iniciarJogo != 3);
+    } while (iniciarJogo != 3); 
 
-    return 0;
+    return 0;
 }
