@@ -152,15 +152,17 @@ int* salvarPontuacao(int pontuacao) {
 }
 
 void lerFase(int fase, int *dificuldade, int *numBombas) {
-    char nomeArquivo[20];
-    sprintf(nomeArquivo, "fase%d.txt", fase);
+    char nomeArquivo[50];
+    sprintf(nomeArquivo, "C:\\Users\\ana carolina\\Downloads\\jogoCampo\\fase%d.txt", fase); 
+    //printf("Tentando abrir o arquivo: %s\n", nomeArquivo);
     FILE *arquivo = fopen(nomeArquivo, "r");
     if (arquivo != NULL) {
+        //printf("Arquivo aberto com sucesso!\n"); 
         fscanf(arquivo, "dificuldade=%d\n", dificuldade);
+        //printf("Dificuldade lida do arquivo: %d\n", *dificuldade); 
         fscanf(arquivo, "numBombas=%d\n", numBombas);
         fclose(arquivo);
-    }
-    else {
+    } else {
         printf("\n\n\t\t\tFase nao encontrada!\n");
     }
 }
@@ -212,12 +214,12 @@ int main() {
 
     do {
         printf("\n\n\n        BEM VINDO AO CAMPO MINADO!\n\n\n");
-        printf("      1.INICIAR JOGO          2.ESTATÍSTICAS          3.SAIR\n\n");
+        printf("      1.INICIAR JOGO          2.ESTATISTICAS          3.SAIR\n\n");
         printf("Digite 1 ou 2 ou 3: ");
         scanf("%d", &iniciarJogo);
 
         if (iniciarJogo == 1) {
-            nivel = 1;
+            nivel = 1; 
             do {
                 if (nivel <= 5) {
                     lerFase(nivel, &dificuldade, &numBombas); 
@@ -233,8 +235,9 @@ int main() {
 
                 printf("\nDigite 1 para continuar jogando e 2 para voltar ao menu principal: ");
                 scanf("%d", &opcao);
-                if (opcao == 1) {
+                if (opcao == 1 && ganhou() == 0) {
                     nivel++;
+                    printf("\n\n\t\t\tPROXIMA FASE\n");
                 }
             } while (opcao == 1);
         } else if (iniciarJogo == 2) {
@@ -242,7 +245,7 @@ int main() {
             printf("\n\n\t\t\tPONTUACOES\n");
             exibirLista(salvarPontuacao(0), 10);
         }
-    } while (iniciarJogo != 3); 
+    } while (iniciarJogo != 3);
 
-    return 0;
+    return 0;
 }
